@@ -1,0 +1,9 @@
+li{
+    margin-right: 15px;
+}
+
+li:hover{
+    color: #48380f;
+    transform: scale(1.2);
+    cursor: pointer;
+}

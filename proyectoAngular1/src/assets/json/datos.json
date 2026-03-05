@@ -1,0 +1,69 @@
+{
+  "navegacion": [
+    {
+      "id": 1,
+      "nombre": "Home",
+      "ruta": "",
+      "icono": "home",
+      "submenu": []
+    },
+    {
+      "id": 2,
+      "nombre": "Articulos",
+      "ruta": "articulos",
+      "icono": "info",
+      "submenu": [
+        {
+          "id": 1,
+          "nombre": "Crear Articulo",
+          "ruta": "crear-articulo",
+          "icono": "add"
+        },
+        {
+          "id": 2,
+          "nombre": "Editar Articulo",
+          "ruta": "editar-articulo",
+          "icono": "edit"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Contacto",
+      "ruta": "contacto",
+      "icono": "mail",
+      "submenu": []
+    },
+    {
+      "id": 4,
+      "nombre": "Sobre Nosotros",
+      "ruta": "sobre nosotros",
+      "icono": "info",
+      "submenu": []
+    }
+  ],
+  "productos":[
+    {
+      "id": 1,
+      "nombre": "",
+      "descripcion": "Descripción del producto 1",
+      "precio": 19.99,
+      "imagen": "ruta/a/imagen1.jpg"
+    },
+    {
+      "id": 2,
+      "nombre": "Producto 2",
+      "descripcion": "Descripción del producto 2",
+      "precio": 29.99,
+      "imagen": "ruta/a/imagen2.jpg"
+    },
+    {
+      "id": 3,
+      "nombre": "Producto 3",
+      "descripcion": "Descripción del producto 3",
+      "precio": 39.99,
+      "imagen": "ruta/a/imagen3.jpg"
+    }
+
+  ]
+}
