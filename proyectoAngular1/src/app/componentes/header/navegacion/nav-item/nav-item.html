@@ -1,1 +1,10 @@
-<li routerLink="{{navItem?.ruta}}">{{ navItem?.nombre }}</li>
+<div (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+  <li routerLink="{{ navItem?.ruta }}" class="opcionesMenu">{{ navItem?.nombre }}</li>
+  <div *ngIf="tieneDesplegable && isHovered">
+    <ul class="subMenu">
+      <li *ngFor="let subItem of navItem?.submenu" class="menuDesplegable">
+        <app-nav-sub-item [subMenu]="subItem"></app-nav-sub-item>
+      </li>
+    </ul>
+  </div>
+</div>

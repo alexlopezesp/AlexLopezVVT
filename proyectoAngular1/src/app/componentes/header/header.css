@@ -1,6 +1,9 @@
 header{
-display: flex;
+  display: flex;
+}
 
+#appOpcionUsuario {
+  margin-left: auto;
 }
 
 .contenedorLogo{

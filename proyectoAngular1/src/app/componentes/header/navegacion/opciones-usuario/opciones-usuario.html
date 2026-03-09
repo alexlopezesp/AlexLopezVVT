@@ -1,0 +1,19 @@
+<div class="contenedorOpcionesUsuario">
+    <app-filtros class="filtros"></app-filtros>
+
+  <div class="carritoOpcionesUsuario" (click)="verCarrito()">
+    <i class="bi bi-cart"></i>
+  </div>
+  
+
+  @if(!sesionIniciada){
+  <div class="iniciarSesionOpcionesUsuario" routerLink="login">
+    <button (click)="loginORegister()" >Iniciar Sesión</button>
+  </div>
+  }@else {
+<div class="usuarioOpcionesUsuario" (click)="verPerfil()">
+    <i class="bi bi-person-circle"></i>
+    <p>{{usuarioAutenticado?.nombre}}</p>
+  </div>
+  }
+</div>

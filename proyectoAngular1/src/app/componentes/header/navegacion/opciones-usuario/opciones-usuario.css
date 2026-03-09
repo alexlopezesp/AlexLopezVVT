@@ -1,0 +1,73 @@
+.contenedorOpcionesUsuario{
+    display:flex;
+    gap: 20px;
+}
+
+.filtros{
+    display:flex;
+    gap: 5px;
+    align-items: center;
+}
+
+
+.carritoOpcionesUsuario{
+    display:flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    border: 16px solid transparent;
+    border-radius: 50%;
+
+}
+.carritoOpcionesUsuario i{
+    font-size: 20px;
+    color: white;
+}
+
+
+.carritoOpcionesUsuario:hover{
+    color: #48380f;
+    background-color: #f0e6d2;
+    i{
+        color: #48380f;
+    }
+}
+
+
+
+.usuarioOpcionesUsuario{
+    gap: 5px;
+    align-items: center;
+    margin-right: 10px;
+}
+.usuarioOpcionesUsuario i{
+    font-size: 20px;
+    color: white;
+   justify-content: center;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.iniciarSesionOpcionesUsuario{
+    display:flex;
+    align-items: center;
+    color: white;
+    background-color: #9f702d;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border-radius: 18px;
+    border: 1px solid white;
+}
+.iniciarSesionOpcionesUsuario:hover{
+    background-color: #48380f;
+    border: 1px solid white;
+}
+.iniciarSesionOpcionesUsuario button{
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+

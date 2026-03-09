@@ -1,0 +1,10 @@
+<div class="cardArticulo">
+    <div class="cardArticuloheader">
+        <img src="{{ articulo.imagen }}" alt="Imagen del artículo" class="cardArticuloImagen">
+    </div>
+    <div class="cardArticuloCurpo">
+        <h3 class="cardTitulo">{{ articulo.nombre }}</h3>
+        <p class="cardDescripcion">{{ articulo.descripcion }}</p>
+        <button class="botones" (click)="comprarArticulo(articulo)">Comprar</button>
+    </div>
+</div>

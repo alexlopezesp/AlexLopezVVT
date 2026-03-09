@@ -1,0 +1,77 @@
+<div class="contenedorLogin">
+  <div class="login-header">
+    <img src="loginRegister.png" alt="Imagen del Login" class="fondoImagen" />
+    <div class="textoEncima">
+      <h1>Bienvenido</h1>
+      <p>Ingresa tus credenciales para crear tu usuario</p>
+    </div>
+  </div>
+
+  <form [formGroup]="formulario" class="formulario" (ngSubmit)="iniciarSesion()">
+    <!-- Nombre -->
+    <div class="nombreFormulario">
+      <label>
+        Nombre
+        <input type="text" formControlName="nombre" />
+      </label>
+      <span class="error" *ngIf="formulario.controls['nombre'].touched && formulario.controls['nombre'].invalid">
+        <span *ngIf="formulario.controls['nombre'].errors?.['required']">El nombre es requerido</span>
+        <span *ngIf="formulario.controls['nombre'].errors?.['minlength']">El nombre debe tener al menos 3 caracteres</span>
+      </span>
+    </div>
+
+    <!-- Apellidos -->
+    <div class="apellidosFormulario">
+      <label>
+        Apellidos
+        <input type="text" formControlName="apellidos" />
+      </label>
+      <span class="error" *ngIf="formulario.controls['apellidos'].touched && formulario.controls['apellidos'].invalid">
+        <span *ngIf="formulario.controls['apellidos'].errors?.['required']">Los apellidos son requeridos</span>
+        <span *ngIf="formulario.controls['apellidos'].errors?.['minlength']">Los apellidos deben tener al menos 3 caracteres</span>
+        <span *ngIf="formulario.controls['apellidos'].errors?.['maxlength']">Los apellidos no pueden superar 45 caracteres</span>
+      </span>
+    </div>
+
+    <!-- Email -->
+    <div class="emailFormulario">
+      <label>
+        Email
+        <input type="email" formControlName="email" />
+      </label>
+      <span class="error" *ngIf="formulario.controls['email'].touched && formulario.controls['email'].invalid">
+        <span *ngIf="formulario.controls['email'].errors?.['required']">Email es requerido</span>
+        <span *ngIf="formulario.controls['email'].errors?.['email']">Introduce un email válido</span>
+      </span>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="passwordFormulario">
+      <label>
+        Contraseña
+        <input type="password" formControlName="password" />
+      </label>
+      <span class="error" *ngIf="formulario.controls['password'].touched && formulario.controls['password'].invalid">
+        <span *ngIf="formulario.controls['password'].errors?.['required']">La contraseña es requerida</span>
+        <span *ngIf="formulario.controls['password'].errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</span>
+      </span>
+    </div>
+
+    <!-- Confirmar Contraseña -->
+    <div class="passwordConfirmFormulario">
+      <label>
+        Confirmar Contraseña
+        <input type="password" formControlName="confirmacionPassword" />
+      </label>
+      <span class="error" *ngIf="formulario.controls['confirmacionPassword'].touched && formulario.controls['confirmacionPassword'].invalid">
+        <span *ngIf="formulario.controls['confirmacionPassword'].errors?.['required']">La confirmación es requerida</span>
+        <span *ngIf="formulario.controls['confirmacionPassword'].errors?.['minlength']">Debe tener al menos 6 caracteres</span>
+      </span>
+      <span class="error" *ngIf="formulario.errors?.['passwordMismatch'] && formulario.controls['confirmacionPassword'].touched">
+        Las contraseñas no coinciden
+      </span>
+    </div>
+
+    <button type="submit" [disabled]="formulario.invalid" class="botones">Registrarme</button>
+  </form>
+</div>

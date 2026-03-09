@@ -1,0 +1,13 @@
+h1{
+    
+    margin: 10px 0 0 10px;
+    color: #9f702d;
+}
+p{
+    margin-left: 10px;
+    color: #bda37d;
+}
+.contenedorArticulos{
+    display: flex;
+    flex-wrap: wrap;
+}

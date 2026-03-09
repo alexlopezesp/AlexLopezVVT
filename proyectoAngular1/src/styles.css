@@ -54,3 +54,27 @@ body {
   background-color: #9f702d;
   font-size: small;
 }
+
+
+.links {
+  color: #9f702d;             
+  text-decoration: none;       
+  font-weight: 600;            
+  cursor: pointer;             
+  transition: all 0.2s ease;   
+}
+
+.links:hover {
+  color: #48380f;              
+  text-decoration: underline;  
+}
+
+.botones{
+    padding: 10px;
+    background-color: #9f702d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: auto;
+}

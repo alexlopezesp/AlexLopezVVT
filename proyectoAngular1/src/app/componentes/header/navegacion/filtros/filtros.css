@@ -1,0 +1,21 @@
+.contenedorBusqueda {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.509);
+}
+input.busqueda {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+input.busqueda::placeholder {
+  color: white;
+  float: right;
+}
+
+input.busqueda:focus {
+  outline: none;
+  border:none;
+
+}

@@ -1,9 +1,26 @@
-li{
-    margin-right: 15px;
+.opcionesMenu {
+  cursor: pointer;
+  list-style: none;
 }
 
-li:hover{
-    color: #48380f;
-    transform: scale(1.2);
-    cursor: pointer;
+.opcionesMenu:hover {
+  color: #48380f;
+
+}
+.menuDesplegable{
+  list-style: none;
+  cursor: pointer;
+}
+
+.subMenu {
+  position: absolute;
+  background-color: #9f702d;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.subMenu li:hover {
+  color: #48380f;
 }

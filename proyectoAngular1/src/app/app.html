@@ -1,5 +1,10 @@
 <div>
-  <app-header [titulo]="title" />
-  <router-outlet />
-  <app-footer />
+  <app-header *ngIf="comprobanteRegistroLogin" [titulo]="title"></app-header>
+
+  <div [ngStyle]="!comprobanteRegistroLogin ? 
+                  {'display': 'flex', 'justify-content': 'center', 'align-items': 'center', 'padding': '20px'} : {}">
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-footer></app-footer>
 </div>

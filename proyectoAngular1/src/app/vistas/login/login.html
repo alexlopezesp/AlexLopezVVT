@@ -1,0 +1,48 @@
+<div class="contenedorLogin">
+  <div class="login-header">
+    <img src="loginRegister.png" alt="Imagen del Login" class="fondoImagen" />
+    <div class="textoEncima">
+      <h1>Bienvenido</h1>
+      <p>Ingresa tus credenciales para acceder</p>
+    </div>
+  </div>
+
+  <form [formGroup]="formulario" class="formulario" (ngSubmit)="iniciarSesion()">
+    <div class="emailFormulario">
+      <label>
+        Email
+        <input type="email" formControlName="email" />
+      </label>
+      @if (formulario.controls['email'].touched && formulario.controls['email'].invalid) {
+        <span class="error">
+          @if (formulario.controls['email'].errors?.['required']) {
+            Email es requerido.
+          }
+          @if (formulario.controls['email'].errors?.['email']) {
+            Introduce un email valido.
+          }
+        </span>
+      }
+    </div>
+    <div class="passwordFormulario">
+      <label>
+        Password
+        <input type="password" formControlName="password" />
+      </label>
+      @if (formulario.controls['password'].touched && formulario.controls['password'].invalid) {
+        <span class="error">
+          @if (formulario.controls['password'].errors?.['required']) {
+            La contraseña es requerida
+          }
+          @if (formulario.controls['password'].errors?.['minlength']) {
+            La contraseña tiene que tener 8 caracteres
+          }
+        </span>
+      }
+    </div>
+    <button type="submit" [disabled]="formulario.invalid" class="botones">Iniciar Sesión</button>
+  </form>
+  <div class="loginFooter">
+      <p>¿No tienes una cuenta? <a routerLink="/registro" class="links">Regístrate aquí</a></p>
+    </div>
+</div>

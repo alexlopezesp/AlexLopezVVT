@@ -1,1 +1,7 @@
-<p>articulos works!</p>
+<div>
+  <h1>Artículos</h1>
+  <p>Mostramos los artículos que más necesites</p>
+  <div class="contenedorArticulos">
+    <app-card-articulo *ngFor="let articulo of articuloService.articulos" [articulo]="articulo"/>
+  </div>
+</div>

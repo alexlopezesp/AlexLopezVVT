@@ -1,13 +1,14 @@
 <header class="contenedoresBasicos">
   <div class="contenedorLogo">
-    <i class="bi bi-motherboard-fill" >
+    <i class="bi bi-motherboard-fill">
       <span>{{ titulo }}</span>
     </i>
   </div>
-  <div class="menu">
-    <ul *ngFor="let navegacionItem of navegacion">
-      <app-nav-item [navItem]="navegacionItem"/>
+  <nav class="menu">
+    <ul *ngFor="let navegacionItem of navegacionSerevice.menu">
+      <app-nav-item [navItem]="navegacionItem" />
     </ul>
-  </div>
-  <div></div>
+  </nav>
+
+  <app-opciones-usuario class="menu" id="appOpcionUsuario"></app-opciones-usuario>
 </header>
