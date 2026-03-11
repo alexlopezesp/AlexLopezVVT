@@ -1,0 +1,73 @@
+@if (usuario) {
+  <form [formGroup]="formulario" class="formulario" (ngSubmit)="actualizarPerfil()">
+    <input type="file" (change)="ficheroSeleccionado($event)" accept="image/*" />
+
+    @if (imageActual) {
+      <img [src]="imageActual" style="max-width: 300px" />
+    }
+
+    <div class="perfilID">
+      <p>ID:{{ usuario.id }}</p>
+    </div>
+
+    <div class="perfilNombre">
+      <label>
+        Nombre
+        <input type="text" formControlName="nombre" [(ngModel)]="usuario.nombre" />
+      </label>
+      <span
+        class="error"
+        *ngIf="formulario.controls['nombre'].touched && formulario.controls['nombre'].invalid"
+      >
+        <span *ngIf="formulario.controls['nombre'].errors?.['required']"
+          >El nombre es requerido</span
+        >
+        <span *ngIf="formulario.controls['nombre'].errors?.['minlength']"
+          >El nombre debe tener al menos 3 caracteres</span
+        >
+      </span>
+    </div>
+
+    <div class="perfilApellidos">
+      <label>
+        Apellidos
+        <input type="text" formControlName="apellidos" [(ngModel)]="usuario.apellidos" />
+      </label>
+      <span
+        class="error"
+        *ngIf="formulario.controls['apellidos'].touched && formulario.controls['apellidos'].invalid"
+      >
+        <span *ngIf="formulario.controls['apellidos'].errors?.['required']"
+          >Los apellidos son requeridos</span
+        >
+        <span *ngIf="formulario.controls['apellidos'].errors?.['minlength']"
+          >Los apellidos deben tener al menos 3 caracteres</span
+        >
+        <span *ngIf="formulario.controls['apellidos'].errors?.['maxlength']"
+          >Los apellidos no pueden superar 45 caracteres</span
+        >
+      </span>
+    </div>
+
+    <div class="perfilEmail">
+      <label>
+        Email
+        <input type="email" formControlName="email" [(ngModel)]="usuario.email" />
+      </label>
+      <span
+        class="error"
+        *ngIf="formulario.controls['email'].touched && formulario.controls['email'].invalid"
+      >
+        <span *ngIf="formulario.controls['email'].errors?.['required']">Email es requerido</span>
+        <span *ngIf="formulario.controls['email'].errors?.['email']"
+          >Introduce un email válido</span
+        >
+      </span>
+    </div>
+    <button class="botones" (click)="actualizarPerfil()">Actualizar Perfil</button>
+  </form>
+} @else {
+  <div>
+    <p>No hay usuario autenticado.</p>
+  </div>
+}

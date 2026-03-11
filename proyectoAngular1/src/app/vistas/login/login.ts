@@ -2,20 +2,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { Auth } from '../../servicios/auth';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
 })
 export class Login implements OnInit {
   protected correo!: string;
   protected password!: string;
-  constructor(private authService: Auth) {}
+  constructor(private authService: Auth, private router: Router) {}
   formulario!: FormGroup;
 
   private fb = new FormBuilder();
@@ -27,20 +27,24 @@ export class Login implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(6),
-          /*Validators.pattern(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\[\]{};':",.<>\/?\\|`~-]).{8,}$/,
-          ),*/
+          Validators.minLength(6)
         ],
       ],
     });
   }
 
-  iniciarSesion() {
-    if (this.formulario.valid) {
-      this.correo=this.formulario.value.email;
-      this.password = this.formulario.value.password;
-      this.authService.login(this.correo, this.password);
+   async iniciarSesion(){
+    if(!this.formulario.valid) return;
+    try {
+      const usuario = await this.authService.loginUsuario(
+        this.formulario.value.email, this.formulario.value.password
+      );
+      console.log('Usuario logueado:', usuario);
+      this.router.navigate(['/']);
+      
+    } catch (error:any) {
+      console.log('Error al iniciar sesión: ', error.message);
+      alert(error.message);
     }
-  }
+   }
 }

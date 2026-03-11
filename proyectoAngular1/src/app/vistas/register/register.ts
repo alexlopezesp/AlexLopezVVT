@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router,RouterModule } from '@angular/router';
 import { Usuario } from '../../modelos/usuario';
 import { UsuarioService } from '../../servicios/usuarioService';
+import { Auth } from '../../servicios/auth';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
@@ -20,7 +21,7 @@ export class Register implements OnInit {
 
   formulario!: FormGroup;
   private fb = new FormBuilder();
-  constructor(protected usuarioService: UsuarioService) {}
+  constructor(protected usuarioService: UsuarioService,protected auth:Auth, private router: Router) {}
 
   ngOnInit(): void {
     this.formulario = this.fb.group(
@@ -35,7 +36,7 @@ export class Register implements OnInit {
     );
   }
 
-  iniciarSesion() {
+ async iniciarSesion() {
     if (this.formulario.valid) {
       const usuario: Usuario = {
         nombre: this.formulario.value.nombre,
@@ -43,14 +44,16 @@ export class Register implements OnInit {
         email: this.formulario.value.email,
         password: this.formulario.value.password,
       };
-      if (usuario != null) {
-        this.usuarioService.crearUsuario(usuario);
-      }
+
+      await this.usuarioService.crearUsuario(usuario);
+      console.log('Usuario autenticado', this.auth.getUsuarioAutenticado());
+      this.router.navigate(['/'])
     }
   }
   passwordIgualValidator(control: FormGroup) {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmacionPassword')?.value;
+    if (!password || !confirmPassword) return null;
 
     return password === confirmPassword ? null : { passwordMismatch: true };
   }

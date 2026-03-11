@@ -1,73 +1,122 @@
-.contenedorOpcionesUsuario{
-    display:flex;
-    gap: 20px;
+.contenedorOpcionesUsuario {
+  display: flex;
+  gap: 20px;
 }
 
-.filtros{
-    display:flex;
-    gap: 5px;
-    align-items: center;
+.filtros {
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
-
-.carritoOpcionesUsuario{
-    display:flex;
-    gap: 5px;
-    align-items: center;
-    cursor: pointer;
-    border: 16px solid transparent;
-    border-radius: 50%;
-
+.carritoOpcionesUsuario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  border: 16px solid transparent;
+  border-radius: 50%;
 }
-.carritoOpcionesUsuario i{
-    font-size: 20px;
-    color: white;
+.carritoOpcionesUsuario i {
+  font-size: 24px;
+  color: white;
 }
-
-
-.carritoOpcionesUsuario:hover{
-    color: #48380f;
-    background-color: #f0e6d2;
-    i{
-        color: #48380f;
-    }
+.carritoOpcionesUsuario:hover {
+  color: #48380f;
+  background-color: #f0e6d2;
+  border-radius: 100%;
 }
-
-
-
-.usuarioOpcionesUsuario{
-    gap: 5px;
-    align-items: center;
-    margin-right: 10px;
+.carritoOpcionesUsuario:hover i {
+  color: #48380f;
 }
-.usuarioOpcionesUsuario i{
-    font-size: 20px;
-    color: white;
-   justify-content: center;
-    display: flex;
-    margin-bottom: 5px;
+.cantidadCarrito {
+  position: absolute;
+  top: 0;      
+  right: 0;    
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 1px solid white;
+  z-index: 1000;
 }
-
-.iniciarSesionOpcionesUsuario{
-    display:flex;
-    align-items: center;
-    color: white;
-    background-color: #9f702d;
-    border: none;
-    padding: 5px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    border-radius: 18px;
-    border: 1px solid white;
-}
-.iniciarSesionOpcionesUsuario:hover{
-    background-color: #48380f;
-    border: 1px solid white;
-}
-.iniciarSesionOpcionesUsuario button{
-    color: white;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
+.cantidadCarrito p{
+font-size: 12px;
+position: relative;
+top: 9px;
 }
 
+/* Usuario */
+.usuarioOpcionesUsuario {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.usuarioOpcionesUsuario i {
+  font-size: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.desplegableUsuario {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #9f702d;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-top: 8px;
+  min-width: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.desplegableUsuario ul {
+  list-style: none;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.desplegableUsuario li {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+}
+
+.desplegableUsuario li:hover span {
+  color: #48380f;
+}
+
+/* Iniciar sesión */
+.iniciarSesionOpcionesUsuario {
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #9f702d;
+  border: 1px solid white;
+  padding: 5px 20px;
+  border-radius: 18px;
+  cursor: pointer;
+}
+.iniciarSesionOpcionesUsuario:hover {
+  background-color: #48380f;
+}
+.iniciarSesionOpcionesUsuario button {
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

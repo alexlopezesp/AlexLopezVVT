@@ -1,12 +1,10 @@
 import { Articulo } from "./articulo";
 import { Descuento } from "./descuento";
+import { ItemCarrito } from "./item-carrito";
+import { Usuario } from "./usuario";
 
 export interface Carrito {
     id: number;
-    articulo: Articulo;
-    cantidad: number;
-    precioTotal: number;
-    descuento: Descuento;
-
-
+    usuario: Usuario;
+    items: ItemCarrito[];
 }

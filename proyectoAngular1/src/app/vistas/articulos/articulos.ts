@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import datos from '../../../assets/json/datos.json';
 import { CardArticulo } from '../../componentes/componentesArticulos/card-articulo/card-articulo';
 import { CommonModule } from '@angular/common';
 import { Articulo } from '../../modelos/articulo';

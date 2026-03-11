@@ -12,7 +12,6 @@ export class NavegacionService {
   public cargarNavegacion(){
     this.api.getNavegacion().subscribe((dato:Menu[])=>{
       this.menu=dato;
-      console.log("obtener todos los datos del los menus:" +this.menu);
     });
   }
 

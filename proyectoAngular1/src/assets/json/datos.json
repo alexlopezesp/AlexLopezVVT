@@ -1,14 +1,14 @@
 {
   "navegacion": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Home",
       "ruta": "",
       "icono": "home",
       "submenu": []
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Articulos",
       "ruta": "articulos",
       "icono": "info",
@@ -28,23 +28,23 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Contacto",
       "ruta": "contacto",
       "icono": "mail",
       "submenu": []
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Sobre Nosotros",
       "ruta": "sobre nosotros",
       "icono": "info",
       "submenu": []
     }
   ],
-  "articulos":[
+  "articulos": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Sandalias",
       "descripcion": "Sandalias cómodas y elegantes para el verano",
       "precio": 19.99,
@@ -52,7 +52,7 @@
       "categoria": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Zapatos Deportivos",
       "descripcion": "Zapatos deportivos cómodos y duraderos para tus actividades físicas",
       "precio": 29.99,
@@ -60,7 +60,7 @@
       "categoria": 2
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Chaqueta de Cuero",
       "descripcion": "Chaqueta de cuero genuino y elegante para el invierno",
       "precio": 39.99,
@@ -68,7 +68,7 @@
       "categoria": 1
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Lámpara de Mesa",
       "descripcion": "Lámpara de mesa moderna y elegante para tu hogar",
       "precio": 49.99,
@@ -76,7 +76,7 @@
       "categoria": 3
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Auriculares Inalámbricos",
       "descripcion": "Auriculares inalámbricos de alta calidad para una experiencia auditiva excepcional",
       "precio": 59.99,
@@ -84,22 +84,39 @@
       "categoria": 2
     }
   ],
-  "categorias":[
+  "categorias": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Ropa"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Electrónica"
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Hogar"
     }
   ],
-  "carrito":[],
-  "pedidos":[],
-  "usuarios":[],
-  "descuentos":[]
+  "carrito": [],
+  "itemCarrito":[],
+  "pedidos": [],
+  "usuarios": [
+    {
+      "id": "325a",
+      "nombre": "alex",
+      "apellidos": "Lopez",
+      "email": "alex.lopez@vivaticket.com",
+      "password": "12345678"
+    },
+    {
+      "id": "db21",
+      "nombre": "alex2",
+      "apellidos": "lopez España",
+      "email": "alexlopez@vivaticket.com",
+      "password": "alexlopez"
+    }
+  ],
+  "descuentos": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }

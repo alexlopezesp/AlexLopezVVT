@@ -1,6 +1,6 @@
-<div class="contenedorLogin">
-  <div class="login-header">
-    <img src="loginRegister.png" alt="Imagen del Login" class="fondoImagen" />
+<div class="contenedorRegister">
+  <div class="register-header">
+    <img src="loginRegister.png" alt="Imagen del Register" class="fondoImagen" />
     <div class="textoEncima">
       <h1>Bienvenido</h1>
       <p>Ingresa tus credenciales para crear tu usuario</p>
@@ -64,7 +64,7 @@
         <input type="password" formControlName="confirmacionPassword" />
       </label>
       <span class="error" *ngIf="formulario.controls['confirmacionPassword'].touched && formulario.controls['confirmacionPassword'].invalid">
-        <span *ngIf="formulario.controls['confirmacionPassword'].errors?.['required']">La confirmación es requerida</span>
+        <span *ngIf="formulario.controls['confirmacionPassword'].errors?.['required']">La confirmación de contraseña es requerida</span>
         <span *ngIf="formulario.controls['confirmacionPassword'].errors?.['minlength']">Debe tener al menos 6 caracteres</span>
       </span>
       <span class="error" *ngIf="formulario.errors?.['passwordMismatch'] && formulario.controls['confirmacionPassword'].touched">

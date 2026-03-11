@@ -1,19 +1,31 @@
 <div class="contenedorOpcionesUsuario">
-    <app-filtros class="filtros"></app-filtros>
+  <app-filtros class="filtros"></app-filtros>
 
   <div class="carritoOpcionesUsuario" (click)="verCarrito()">
     <i class="bi bi-cart"></i>
+    @if (cantidadCarrito() < 0) {
+      <div class="cantidadCarrito">
+        <p>{{ cantidadCarrito() }}</p>
+      </div>
+    }
   </div>
-  
 
-  @if(!sesionIniciada){
-  <div class="iniciarSesionOpcionesUsuario" routerLink="login">
-    <button (click)="loginORegister()" >Iniciar Sesión</button>
-  </div>
-  }@else {
-<div class="usuarioOpcionesUsuario" (click)="verPerfil()">
-    <i class="bi bi-person-circle"></i>
-    <p>{{usuarioAutenticado?.nombre}}</p>
-  </div>
+  @if (!sesionIniciada()) {
+    <div class="iniciarSesionOpcionesUsuario" routerLink="login">
+      <button (click)="loginORegister()">Iniciar Sesión</button>
+    </div>
+  } @else {
+    <div class="usuarioOpcionesUsuario" (click)="verDesplegable()">
+      <i class="bi bi-person-circle"></i>
+      <p>{{ usuarioAutenticado()?.nombre }}</p>
+      @if (desplegable) {
+        <div class="desplegableUsuario">
+          <ul>
+            <li routerLink="perfil"><span>Perfil</span></li>
+            <li (click)="desconectar()"><span>Desconectar</span></li>
+          </ul>
+        </div>
+      }
+    </div>
   }
 </div>

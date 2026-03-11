@@ -1,6 +1,6 @@
 .cardArticulo{
     width: 300px;
-    height: 400px;
+    height: 450px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -31,5 +31,17 @@
 .cardDescripcion{
     font-size: 1em;
     color: #bda37d;
+}
+.contenedoPrecio{
+    display: flex;
+    justify-content: right;
+position: relative;
+}
+.cardPrecio{
+    display: flex;
+    color: #9f702d;
+    font-weight: bold;
+    z-index: 1000;
+    
 }
 

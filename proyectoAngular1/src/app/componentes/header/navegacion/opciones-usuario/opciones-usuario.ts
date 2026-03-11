@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Filtros  } from "../filtros/filtros";
+import { Component, computed, OnInit } from '@angular/core';
+import { Filtros } from '../filtros/filtros';
 import { Auth } from '../../../../servicios/auth';
-import { RouterLink } from "@angular/router";
-
+import { Router, RouterLink } from '@angular/router';
+import { CarritoService } from '../../../../servicios/carrito-service';
 
 @Component({
   selector: 'app-opciones-usuario',
@@ -10,25 +10,34 @@ import { RouterLink } from "@angular/router";
   templateUrl: './opciones-usuario.html',
   styleUrl: './opciones-usuario.css',
 })
-export class OpcionesUsuario {
+export class OpcionesUsuario  {
+  desplegable: boolean = false;
 
-  constructor(private authService: Auth) {}
+  constructor(
+    private authService: Auth,
+    private router: Router,
+    private carritoService:CarritoService
+  ) {}
 
-  get sesionIniciada(): boolean {
-    return this.authService.estaLogueado();
-  }
-  get usuarioAutenticado() {
-    return this.authService.getUsuarioAutenticado();
+  usuarioAutenticado = computed(()=> this.authService.getUsuarioAutenticado());
+  sesionIniciada = computed(() => this.authService.estaLogueado());
+  cantidadCarrito= computed(()=>  this.carritoService.obtenerCantidadArticulosCarrito());
+
+  verCarrito() {
+    console.log('Ver carrito');
+    console.log("Cantidad del carrito:", this.cantidadCarrito());
   }
 
-  verCarrito(){
-    console.log("Ver carrito");
-  }
-  verPerfil(){
-    console.log("Ver perfil");
+  verDesplegable() {
+    console.log('Ver perfil, desplegable:', this.desplegable);
+    this.desplegable = !this.desplegable;
   }
 
-  loginORegister(){
-    console.log("Login o Register");
+  loginORegister() {
+    console.log('Login o Register');
+  }
+  desconectar() {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 }
