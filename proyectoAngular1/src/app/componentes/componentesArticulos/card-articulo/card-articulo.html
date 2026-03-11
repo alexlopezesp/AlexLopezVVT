@@ -1,13 +1,26 @@
 <div class="cardArticulo">
   <div class="cardArticuloheader">
     <img src="{{ articulo.imagen }}" alt="Imagen del artículo" class="cardArticuloImagen" />
+    @if (articulo.descuento) {
+      <div class="cardDescuento">
+        <p>{{ articulo.descuento.porcentaje }}%</p>
+      </div>
+    }
   </div>
   <div class="cardArticuloCurpo">
     <h3 class="cardTitulo">{{ articulo.nombre }}</h3>
     <p class="cardDescripcion">{{ articulo.descripcion }}</p>
-    <div class="contenedoPrecio">
-      <p class="cardPrecio">{{ articulo.precio }} €</p>
-    </div>
+    @if (articulo.descuento) {
+      <div class="contenedoPrecio">
+        <p class="cardPrecioOriginal">{{ articulo.precio }} €</p>
+        <p class="cardPrecioDescuento">{{ articulo.precioConDescuento || articulo.precio }} €</p>
+      </div>
+    } @else {
+      <div class="contenedoPrecio">
+        <p class="cardPrecio">{{ articulo.precio }} €</p>
+      </div>
+    }
+
     <button class="botones" (click)="comprarArticulo(articulo)">Comprar</button>
   </div>
 </div>

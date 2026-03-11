@@ -42,6 +42,26 @@
       "submenu": []
     }
   ],
+  "descuentos": [
+    {
+      "id": 1,
+      "articuloId": 1,
+      "porcentaje": 5,
+      "estado": true
+    },
+    {
+      "id": 2,
+      "articuloId": 2,
+      "porcentaje": 30,
+      "estado": false
+    },
+    {
+      "id": 3,
+      "articuloId": 4,
+      "porcentaje": 70,
+      "estado": false
+    }
+  ],
   "articulos": [
     {
       "id": "1",
@@ -49,7 +69,14 @@
       "descripcion": "Sandalias cómodas y elegantes para el verano",
       "precio": 19.99,
       "imagen": "sandalias.png",
-      "categoria": 1
+      "categoria": 1,
+      "descuento": {
+        "id": 1,
+        "articuloId": 1,
+        "porcentaje": 5,
+        "estado": true
+      },
+      "precioConDescuento": 18.99
     },
     {
       "id": "2",
@@ -57,7 +84,9 @@
       "descripcion": "Zapatos deportivos cómodos y duraderos para tus actividades físicas",
       "precio": 29.99,
       "imagen": "zapatillas.png",
-      "categoria": 2
+      "categoria": 2,
+      "descuento": null,
+      "precioConDescuento": 29.99
     },
     {
       "id": "3",
@@ -65,7 +94,9 @@
       "descripcion": "Chaqueta de cuero genuino y elegante para el invierno",
       "precio": 39.99,
       "imagen": "chaquetacuero.png",
-      "categoria": 1
+      "categoria": 1,
+      "descuento": null,
+      "precioConDescuento": 39.99
     },
     {
       "id": "4",
@@ -73,7 +104,9 @@
       "descripcion": "Lámpara de mesa moderna y elegante para tu hogar",
       "precio": 49.99,
       "imagen": "lampara.png",
-      "categoria": 3
+      "categoria": 3,
+      "descuento": null,
+      "precioConDescuento": 49.99
     },
     {
       "id": "5",
@@ -81,7 +114,9 @@
       "descripcion": "Auriculares inalámbricos de alta calidad para una experiencia auditiva excepcional",
       "precio": 59.99,
       "imagen": "auriculares.png",
-      "categoria": 2
+      "categoria": 2,
+      "descuento": null,
+      "precioConDescuento": 59.99
     }
   ],
   "categorias": [
@@ -99,7 +134,7 @@
     }
   ],
   "carrito": [],
-  "itemCarrito":[],
+  "itemCarrito": [],
   "pedidos": [],
   "usuarios": [
     {
@@ -117,6 +152,6 @@
       "password": "alexlopez"
     }
   ],
-  "descuentos": [],
+
   "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgOptimizedImage } from "@angular/common";
 
 @Component({
   selector: 'app-card-articulo',
@@ -11,6 +10,7 @@ export class CardArticulo implements OnInit{
   
   ngOnInit(): void {
     console.log(this.articulo);
+    console.log("Descueno articulo:",this.articulo.descuento);
   }
 
   comprarArticulo(articulo: any):void {

@@ -1,3 +1,5 @@
+import { Descuento } from "./descuento";
+
 export interface Articulo {
     id: number;
     nombre: string;
@@ -5,4 +7,6 @@ export interface Articulo {
     precio: number;
     imagen: string;
     categoria: number;
+    descuento?: Descuento;
+    precioConDescuento?: number;
 }

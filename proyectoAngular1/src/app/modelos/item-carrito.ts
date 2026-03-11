@@ -6,6 +6,5 @@ export interface ItemCarrito {
     carritoId:number;
     articulo:Articulo;
     cantidad:number;
-    descuento?:Descuento;
     comprado:boolean;
 }

@@ -1,5 +1,6 @@
 export interface Descuento {
-    id:number,
-    porcentaje:number,
-    estado:boolean
+    id:number;
+    articuloId:number;
+    porcentaje:number;
+    estado:boolean;
 }
