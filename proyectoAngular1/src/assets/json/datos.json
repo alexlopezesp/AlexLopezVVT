@@ -44,19 +44,19 @@
   ],
   "descuentos": [
     {
-      "id": 1,
+      "id": "1",
       "articuloId": 1,
       "porcentaje": 5,
       "estado": true
     },
     {
-      "id": 2,
+      "id": "2",
       "articuloId": 2,
       "porcentaje": 30,
       "estado": false
     },
     {
-      "id": 3,
+      "id": "3",
       "articuloId": 4,
       "porcentaje": 70,
       "estado": false
@@ -134,7 +134,7 @@
     }
   ],
   "carrito": [],
-  "itemCarrito": [],
+  "lineasCarrito": [],
   "pedidos": [],
   "usuarios": [
     {
@@ -152,6 +152,5 @@
       "password": "alexlopez"
     }
   ],
-
   "$schema": "./node_modules/json-server/schema.json"
 }

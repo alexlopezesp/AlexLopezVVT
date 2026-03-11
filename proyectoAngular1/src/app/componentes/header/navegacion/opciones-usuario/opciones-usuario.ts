@@ -10,22 +10,29 @@ import { CarritoService } from '../../../../servicios/carrito-service';
   templateUrl: './opciones-usuario.html',
   styleUrl: './opciones-usuario.css',
 })
-export class OpcionesUsuario  {
+export class OpcionesUsuario implements OnInit{
   desplegable: boolean = false;
 
   constructor(
     private authService: Auth,
     private router: Router,
-    private carritoService:CarritoService
+    private carritoService: CarritoService,
   ) {}
+  ngOnInit(): void {
+    const usuario= this.authService.getUsuarioAutenticado();
+    if(usuario) this.carritoService.cargarCarrito(usuario);
+  }
 
-  usuarioAutenticado = computed(()=> this.authService.getUsuarioAutenticado());
+  usuarioAutenticado = computed(() => this.authService.getUsuarioAutenticado());
   sesionIniciada = computed(() => this.authService.estaLogueado());
-  cantidadCarrito= computed(()=>  this.carritoService.obtenerCantidadArticulosCarrito());
+  cantidadCarrito = computed(() => {
+    const car = this.carritoService.carrito();
+    return car?.lineas?.length || 0;
+  });
 
   verCarrito() {
     console.log('Ver carrito');
-    console.log("Cantidad del carrito:", this.cantidadCarrito());
+    console.log('Cantidad del carrito:', this.cantidadCarrito());
   }
 
   verDesplegable() {

@@ -6,7 +6,7 @@ import { Articulo } from '../modelos/articulo';
 import { Usuario } from '../modelos/usuario';
 import { Menu } from '../modelos/menu';
 import { Carrito } from '../modelos/carrito';
-import { ItemCarrito } from './item-carrito';
+import { LineaCarrito } from '../modelos/linea-carrito';
 
 @Injectable({
   providedIn: 'root',
@@ -26,15 +26,15 @@ export class Api {
   }
 
   putActualizarUsuario(usuario: Partial<Usuario>): Observable<Usuario> {
-  console.log('Usuario a la hora de actualizarlo:', usuario);
-  
-  return this.http.put<Usuario>(`${this.API_URL}/usuarios/${usuario.id}`, usuario).pipe(
-    tap({
-      next: (res) => console.log('✅ PUT exitoso:', res),
-      error: (err) => console.error('❌ Error en PUT:', err)
-    })
-  );
-}
+    console.log('Usuario a la hora de actualizarlo:', usuario);
+
+    return this.http.put<Usuario>(`${this.API_URL}/usuarios/${usuario.id}`, usuario).pipe(
+      tap({
+        next: (res) => console.log('✅ PUT exitoso:', res),
+        error: (err) => console.error('❌ Error en PUT:', err),
+      }),
+    );
+  }
 
   postUsuario(user: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.API_URL}/usuarios`, user);
@@ -51,18 +51,27 @@ export class Api {
     return this.http.get<Menu[]>(`${this.API_URL}/navegacion`);
   }
 
-    /*------ Carrito ------*/
-    getCarritoPorUsuario(usuario:Usuario):Observable<Carrito>{
-      return this.http.get<Carrito>(`${this.API_URL}/carrito`)
+  /*------ Carrito ------*/
+  getCarritoPorUsuario(usuario: Usuario): Observable<Carrito> {
+    return this.http.get<Carrito>(`${this.API_URL}/carrito`);
+  }
 
-    }
+  /*------ Lineas Carrito ------*/
+  getLineasCarrito(carritoID: number): Observable<LineaCarrito[]> {
+    return this.http.get<LineaCarrito[]>(`${this.API_URL}/lineasCarrito?carritoId=${carritoID}`);
+  }
+  postLineasCarrito(linea: LineaCarrito): Observable<LineaCarrito> {
+    return this.http.post<LineaCarrito>(`${this.API_URL}/lineasCarrito`, linea);
+  }
 
-    /*------ Lineas Carrito ------*/
-    getLineasCarrito(carritoID:number):Observable<ItemCarrito[]>{
-      return this.http.get<ItemCarrito[]>(`${this.API_URL}/itemCarrito?carritoId=${carritoID}`)
-    }
-    postLineasCarrito(linea:ItemCarrito):Observable<ItemCarrito>{
-      return this.http.post<ItemCarrito>(`${this.API_URL}/itemCarrito`,linea)
-    }
+  actualizarlineaCarrito(linea: Partial<LineaCarrito>): Observable<LineaCarrito> {
+    console.log('Linea a la hora de actualizarlo:', linea);
 
+    return this.http.put<LineaCarrito>(`${this.API_URL}/lineasCarrito/${linea.id}`, linea).pipe(
+      tap({
+        next: (res) => console.log('✅ PUT exitoso:', res),
+        error: (err) => console.error('❌ Error en PUT:', err),
+      }),
+    );
+  }
 }

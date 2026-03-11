@@ -3,7 +3,7 @@
 
   <div class="carritoOpcionesUsuario" (click)="verCarrito()">
     <i class="bi bi-cart"></i>
-    @if (cantidadCarrito() < 0) {
+    @if (cantidadCarrito() > 0) {
       <div class="cantidadCarrito">
         <p>{{ cantidadCarrito() }}</p>
       </div>

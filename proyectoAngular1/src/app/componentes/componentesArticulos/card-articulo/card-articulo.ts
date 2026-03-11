@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CarritoService } from '../../../servicios/carrito-service';
 
 @Component({
   selector: 'app-card-articulo',
@@ -7,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardArticulo implements OnInit{
   @Input() articulo?: any;
+
+  constructor(protected carrtioService:CarritoService){}
   
   ngOnInit(): void {
     console.log(this.articulo);
@@ -15,5 +18,6 @@ export class CardArticulo implements OnInit{
 
   comprarArticulo(articulo: any):void {
     console.log(`Comprando artículo: ${articulo.nombre}`);
+    this.carrtioService.anyadirLineaCarrito(this.articulo);
   }
 }

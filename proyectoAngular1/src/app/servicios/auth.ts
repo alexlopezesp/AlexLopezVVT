@@ -68,6 +68,7 @@ export class Auth {
     this.usuarioAutenticado.set(null);
     this.cookieCargada = false;
     this.primeraEjecucionEffect = true;
+    this.cookieService.delete('user')
   }
 
   registrar(usuario: Usuario): Observable<Usuario> {
@@ -140,7 +141,6 @@ async actualizarUsuario(usuario: Partial<Usuario> & { email: string }) {
 }
 
   estaLogueado(): boolean {
-    this.cargarUsuarioDesdeCookie();
     return this.usuarioAutenticado() !== null;
   }
   forzarCargaDeCookie(): void {
