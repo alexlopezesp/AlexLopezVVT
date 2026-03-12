@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Api } from './api';
 import { Observable } from 'rxjs';
 import { Articulo } from '../modelos/articulo';
@@ -7,13 +7,14 @@ import { Articulo } from '../modelos/articulo';
   providedIn: 'root',
 })
 export class ArticuloService {
-  articulos: Articulo[] = [];
+  articulos = signal<Articulo[]>([]);
+  
   constructor(private api: Api) {}
 
   public cargarArticulos(){
     this.api.getArticulos().subscribe((data: Articulo[])=>{
-      this.articulos=data;
-      console.log("Obtener todos los datos de articulo:"+this.articulos)
+      this.articulos.set(data);
+      console.log("Obtener todos los datos de articulo:"+this.articulos())
     });
   }
 }

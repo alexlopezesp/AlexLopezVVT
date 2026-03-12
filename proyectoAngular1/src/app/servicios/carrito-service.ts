@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Carrito } from '../modelos/carrito';
 import { Api } from './api';
 import { Usuario } from '../modelos/usuario';
@@ -12,6 +12,7 @@ import { LineaCarritoService } from './linea-carrito';
 })
 export class CarritoService {
   carrito = signal<Carrito | null>(null);
+  private carritoEnProceso = false;
 
   constructor(
     private api: Api,
@@ -19,9 +20,15 @@ export class CarritoService {
     private lineaCarritoService: LineaCarritoService,
   ) {}
 
+  cantidadArticulos = computed(() => {
+    return this.carrito()?.lineas?.length || 0;
+  });
+
   public cargarCarrito(usuario: Usuario) {
-    this.api.getCarritoPorUsuario(usuario).subscribe((car) => {
-      this.carrito.set(car);
+    this.api.getCarritoPorUsuario(usuario).subscribe((carros) => {
+      const carrito = Array.isArray(carros) ? carros[0] : carros;
+      this.carrito.set(carrito || null);
+      console.log('Carrito cargado:', carrito);
     });
   }
 
@@ -29,58 +36,59 @@ export class CarritoService {
     const car = this.carrito();
     return car?.lineas?.length || 0;
   }
-
-  public anyadirLineaCarrito(articuloLinea: Articulo) {
-    if (!this.carrito()) {
-      this.carrito.set({
-        id: Date.now(),
-        usuario: this.authService?.getUsuarioAutenticado() || undefined,
-        lineas: [],
-        precioTotal: 0,
-      });
+  public crearCarrito(){
+    const usuario = this.authService.getUsuarioAutenticado();
+    
+    if (!usuario?.id) {
+      console.warn('Usuario no autenticado, no se puede crear carrito');
+      return;
     }
 
-    const car = this.carrito();
-    const lineas = car?.lineas ?? [];
-    const lineaExistente = lineas.find((l) => l.articulo.id === articuloLinea.id);
-
-    let linea: LineaCarrito;
-    let comprobante: boolean;
-
-    if (lineaExistente) {
-      linea = {
-        ...lineaExistente,
-        cantidad: lineaExistente.cantidad + 1,
-      };
-      comprobante = false;
-    } else {
-      linea = {
-        carritoId: car!.id,
-        articulo: articuloLinea,
-        cantidad: 1,
-        comprado: false,
-      };
-      comprobante = true;
+    // Evitar múltiples llamadas simultáneas
+    if (this.carritoEnProceso) {
+      console.log('Carrito ya está en proceso de creación');
+      return;
     }
 
-    this.lineaCarritoService.anyadirLineaCarrito(linea, comprobante).subscribe({
-      next: () => {
-        const usuario = this.authService.getUsuarioAutenticado();
-        if (usuario) {
-          this.api.getCarritoPorUsuario(usuario).subscribe((carActualizado) => {
-            const carrito = Array.isArray(carActualizado) ? carActualizado[0] : carActualizado;
-            this.carrito.set(carrito ?? null);
-            console.log('Carrito actualizado desde API:', carActualizado);
-          });
+    this.carritoEnProceso = true;
+
+    // Primero intenta cargar el carrito existente
+    this.api.getCarritoPorUsuario(usuario).subscribe({
+      next: (carros) => {
+        const carritoExistente = Array.isArray(carros) ? carros[0] : carros;
+        
+        if (carritoExistente) {
+          // Si existe, usarlo
+          this.carrito.set(carritoExistente);
+          console.log('Carrito existente cargado:', carritoExistente);
+        } else {
+          // Si no existe, crear uno nuevo
+          this.crearCarritoNuevo();
         }
+        
+        this.carritoEnProceso = false;
       },
-      error: (err) => console.error('Error al añadir/actualizar línea:', err),
+      error: (err) => {
+        console.error('Error al cargar carrito:', err);
+        // Si hay error, intentar crear uno nuevo
+        this.crearCarritoNuevo();
+        this.carritoEnProceso = false;
+      }
     });
   }
 
-  private existeArticuloCarrito(articulo: Articulo) {
-    const car = this.carrito();
-    if (!car || !car.lineas) return false;
-    return car.lineas.some((lin) => lin.articulo.id === articulo.id);
+  private crearCarritoNuevo() {
+    const nuevoCarrito: Carrito = {
+      lineas: [],
+      precioTotal: 0,
+    };
+    
+    this.api.postCrearCarrito(nuevoCarrito).subscribe({
+      next: (carritoCreado) => {
+        this.carrito.set(carritoCreado);
+        console.log('Carrito creado en DB:', carritoCreado);
+      },
+      error: (err) => console.error('Error al crear carrito:', err),
+    });
   }
 }

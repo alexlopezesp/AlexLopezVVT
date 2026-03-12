@@ -52,8 +52,12 @@ export class Api {
   }
 
   /*------ Carrito ------*/
-  getCarritoPorUsuario(usuario: Usuario): Observable<Carrito> {
-    return this.http.get<Carrito>(`${this.API_URL}/carrito`);
+  getCarritoPorUsuario(usuario: Usuario): Observable<Carrito[]> {
+    return this.http.get<Carrito[]>(`${this.API_URL}/carrito?usuarioId=${usuario.id}`);
+  }
+
+  postCrearCarrito(carrito: Carrito): Observable<Carrito> {
+    return this.http.post<Carrito>(`${this.API_URL}/carrito`, carrito);
   }
 
   /*------ Lineas Carrito ------*/

@@ -133,7 +133,13 @@
       "nombre": "Hogar"
     }
   ],
-  "carrito": [],
+  "carrito": [
+    {
+      "id": "8f4f",
+      "lineas": [],
+      "precioTotal": 0
+    }
+  ],
   "lineasCarrito": [],
   "pedidos": [],
   "usuarios": [
@@ -146,7 +152,7 @@
     },
     {
       "id": "db21",
-      "nombre": "alex2",
+      "nombre": "alex3",
       "apellidos": "lopez España",
       "email": "alexlopez@vivaticket.com",
       "password": "alexlopez"

@@ -1,11 +1,10 @@
 <div class="contenedorOpcionesUsuario">
   <app-filtros class="filtros"></app-filtros>
 
-  <div class="carritoOpcionesUsuario" (click)="verCarrito()">
+  <div class="carritoOpcionesUsuario" (click)="verCarrito()" routerLink="/carrito">
     <i class="bi bi-cart"></i>
     @if (cantidadCarrito() > 0) {
       <div class="cantidadCarrito">
-        <p>{{ cantidadCarrito() }}</p>
       </div>
     }
   </div>

@@ -8,6 +8,7 @@ import { Register } from './vistas/register/register';
 import path from 'path';
 import { Component } from '@angular/core';
 import { Perfil } from './vistas/perfil/perfil';
+import { Carrito } from './vistas/carrito/carrito';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,10 @@ export const routes: Routes = [
   {
     path: 'perfil',
     component: Perfil,
+  },
+  {
+    path: 'carrito',
+    component: Carrito,
   },
 
   {

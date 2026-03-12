@@ -1,1 +1,15 @@
-<p>carrito works!</p>
+<div>
+    @if (lineas().length === 0) {
+        <p>Tu carrito está vacío</p>
+    } @else {
+        <section>
+            @for (linea of lineas(); track $index) {
+                <article>
+                    <p>{{linea.articulo!.nombre}}</p>
+                    <p>Cantidad: {{linea.cantidad}}</p>
+                    <p>Precio: {{linea.articulo!.precio}}€</p>
+                </article>
+            }
+        </section>
+    }
+</div>

@@ -5,7 +5,7 @@
     </i>
   </div>
   <nav class="menu">
-    <ul *ngFor="let navegacionItem of navegacionSerevice.menu">
+    <ul *ngFor="let navegacionItem of navegacionSerevice.menu()">
       <app-nav-item [navItem]="navegacionItem" />
     </ul>
   </nav>

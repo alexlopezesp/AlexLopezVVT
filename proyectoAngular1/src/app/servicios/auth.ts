@@ -1,4 +1,4 @@
-import { Injectable, Inject, PLATFORM_ID, signal, effect } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID, signal, effect, inject, Injector } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Usuario } from '../modelos/usuario';
 import { Api } from './api';
@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { enviroment } from '../../enviroments/enviroment';
 import AES from 'crypto-js/aes';
 import Utf8 from 'crypto-js/enc-utf8';
+import { CarritoService } from './carrito-service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +19,16 @@ export class Auth {
 
   private cookieCargada = false;
   private primeraEjecucionEffect = true;
+  private primeraEjecucionCarritoEffect = true;
+  private injector: Injector;
 
   constructor(
     private api: Api,
     private cookieService: CookieService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    injector: Injector,
   ) {
+    this.injector = injector;
     this.cargarUsuarioDesdeCookie();
 
     effect(() => {
@@ -41,6 +46,24 @@ export class Auth {
         document.cookie = `user=${usuarioBase64}; max-age=${60 * 60 * 24}; path=/`;
       } else {
         this.cookieService.delete('user');
+      }
+    });
+
+    // Effect para crear carrito cuando hay usuario autenticado
+    effect(() => {
+      const usuario = this.usuarioAutenticado();
+      
+      if (this.primeraEjecucionCarritoEffect) {
+        this.primeraEjecucionCarritoEffect = false;
+        return;
+      }
+
+      if (usuario) {
+        const carritoService = this.injector.get(CarritoService);
+        carritoService.crearCarrito();
+      } else {
+        const carritoService = this.injector.get(CarritoService);
+        carritoService.carrito.set(null);
       }
     });
   }
@@ -68,7 +91,7 @@ export class Auth {
     this.usuarioAutenticado.set(null);
     this.cookieCargada = false;
     this.primeraEjecucionEffect = true;
-    this.cookieService.delete('user')
+    this.cookieService.delete('user');
   }
 
   registrar(usuario: Usuario): Observable<Usuario> {

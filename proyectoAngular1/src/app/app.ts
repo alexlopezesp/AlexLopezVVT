@@ -12,7 +12,8 @@ import {CommonModule} from '@angular/common';
 export class App {
   protected title = 'Proyecto Angular';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   get comprobanteRegistroLogin(): boolean {
     return !this.router.url.includes('login') && !this.router.url.includes('registro');

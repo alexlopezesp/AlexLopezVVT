@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Menu } from '../modelos/menu';
 import { Api } from './api';
 
@@ -6,12 +6,13 @@ import { Api } from './api';
   providedIn: 'root',
 })
 export class NavegacionService {
-  menu: Menu[] =[];
+  menu = signal<Menu[]>([]);
+  
   constructor(private api:Api){};
 
   public cargarNavegacion(){
     this.api.getNavegacion().subscribe((dato:Menu[])=>{
-      this.menu=dato;
+      this.menu.set(dato);
     });
   }
 
