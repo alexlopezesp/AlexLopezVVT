@@ -135,12 +135,82 @@
   ],
   "carrito": [
     {
-      "id": "8f4f",
+      "id": "1e59",
       "lineas": [],
       "precioTotal": 0
     }
   ],
-  "lineasCarrito": [],
+  "lineasCarrito": [
+    {
+      "id": "5b01",
+      "carritoId": 1e+59,
+      "articulo": {
+        "id": "3",
+        "nombre": "Chaqueta de Cuero",
+        "descripcion": "Chaqueta de cuero genuino y elegante para el invierno",
+        "precio": 39.99,
+        "imagen": "chaquetacuero.png",
+        "categoria": 1,
+        "descuento": null,
+        "precioConDescuento": 39.99
+      },
+      "cantidad": 2,
+      "comprado": false
+    },
+    {
+      "id": "73ae",
+      "carritoId": 1e+59,
+      "articulo": {
+        "id": "4",
+        "nombre": "Lámpara de Mesa",
+        "descripcion": "Lámpara de mesa moderna y elegante para tu hogar",
+        "precio": 49.99,
+        "imagen": "lampara.png",
+        "categoria": 3,
+        "descuento": null,
+        "precioConDescuento": 49.99
+      },
+      "cantidad": 1,
+      "comprado": false
+    },
+    {
+      "id": "19b5",
+      "carritoId": 1e+59,
+      "articulo": {
+        "id": "1",
+        "nombre": "Sandalias",
+        "descripcion": "Sandalias cómodas y elegantes para el verano",
+        "precio": 19.99,
+        "imagen": "sandalias.png",
+        "categoria": 1,
+        "descuento": {
+          "id": 1,
+          "articuloId": 1,
+          "porcentaje": 5,
+          "estado": true
+        },
+        "precioConDescuento": 18.99
+      },
+      "cantidad": 1,
+      "comprado": false
+    },
+    {
+      "id": "8e37",
+      "carritoId": 1e+59,
+      "articulo": {
+        "id": "5",
+        "nombre": "Auriculares Inalámbricos",
+        "descripcion": "Auriculares inalámbricos de alta calidad para una experiencia auditiva excepcional",
+        "precio": 59.99,
+        "imagen": "auriculares.png",
+        "categoria": 2,
+        "descuento": null,
+        "precioConDescuento": 59.99
+      },
+      "cantidad": 1,
+      "comprado": false
+    }
+  ],
   "pedidos": [],
   "usuarios": [
     {

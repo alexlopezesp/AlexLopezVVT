@@ -14,7 +14,6 @@ export class ArticuloService {
   public cargarArticulos(){
     this.api.getArticulos().subscribe((data: Articulo[])=>{
       this.articulos.set(data);
-      console.log("Obtener todos los datos de articulo:"+this.articulos())
     });
   }
 }

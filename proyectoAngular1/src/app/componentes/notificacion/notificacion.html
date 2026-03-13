@@ -1,0 +1,9 @@
+<div class="contenedor-mensajes">
+  <div
+    *ngFor="let mensaje of mensajes"
+    [ngClass]="{ error: mensaje.tipo === 'error', info: mensaje.tipo === 'info' }"
+    class="mensaje">
+    {{ mensaje.texto }}
+    <button (click)="eliminarMensaje(mensaje.id)">x</button>
+  </div>
+</div>

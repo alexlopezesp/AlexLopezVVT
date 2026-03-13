@@ -3,6 +3,7 @@ import { Api } from './api';
 import { Observable, firstValueFrom } from 'rxjs';
 import { Usuario } from '../modelos/usuario';
 import { Auth } from './auth';
+import { MensajesService } from './mensajesService';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class UsuarioService {
   constructor(
     private api: Api,
     private auth: Auth,
+    public mensajesService:MensajesService
   ) {}
   obtenerTodosUsuarios(): Observable<Usuario[]> {
     return this.api.getUsuarios() as Observable<Usuario[]>;
@@ -24,7 +26,8 @@ export class UsuarioService {
       const usuarioExistente = await firstValueFrom(this.api.getUsuarioCorreo(usuario.email));
 
       if (usuarioExistente) {
-        alert('El correo ya está registr ado');
+        this.mensajesService.agregarMensaje(`El correo ya está registrado `);
+
         return null;
       }
 
@@ -37,9 +40,9 @@ export class UsuarioService {
 
       return usuarioCreado;
     } catch (error) {
-      console.error('Error creando usuario', error);
+      this.mensajesService.agregarMensaje(`Error creando usuario`, 'error');
+
       return null;
     }
   }
-
 }

@@ -4,7 +4,7 @@ import { LineaCarrito } from "./linea-carrito";
 import { Usuario } from "./usuario";
 
 export interface Carrito {
-    id?: number;
+    id?: number | string;
     lineas?: LineaCarrito[];
     precioTotal: number;
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
-import { map, Observable, tap } from 'rxjs';
+import { filter, map, Observable, tap } from 'rxjs';
 import { Articulo } from '../modelos/articulo';
 import { Usuario } from '../modelos/usuario';
 import { Menu } from '../modelos/menu';
@@ -55,14 +55,32 @@ export class Api {
   getCarritoPorUsuario(usuario: Usuario): Observable<Carrito[]> {
     return this.http.get<Carrito[]>(`${this.API_URL}/carrito?usuarioId=${usuario.id}`);
   }
+  getCarrito(): Observable<Carrito | null>{
+    return this.http.get<Carrito[]>(`${this.API_URL}/carrito`).pipe(
+      map(carritos => (carritos.length >0 ? carritos[0]:null))
+    )
+  }
 
+  getCarritoID(): Observable<number>{
+    return this.http.get<Carrito[]>(`${this.API_URL}/carrito`).pipe(
+      filter(carritos => carritos.length>0),
+      map(carritos => Number(carritos[0]?.id))
+    )
+  }
   postCrearCarrito(carrito: Carrito): Observable<Carrito> {
     return this.http.post<Carrito>(`${this.API_URL}/carrito`, carrito);
   }
+  eliminarCarrito(){
+    return this.http.delete(`${this.API_URL}/carrito/}`);
+  }
 
   /*------ Lineas Carrito ------*/
-  getLineasCarrito(carritoID: number): Observable<LineaCarrito[]> {
+  getLineasCarritoID(carritoID: string): Observable<LineaCarrito[]> {
     return this.http.get<LineaCarrito[]>(`${this.API_URL}/lineasCarrito?carritoId=${carritoID}`);
+  }
+
+  getLineasCarrito():Observable<LineaCarrito[]>{
+    return this.http.get<LineaCarrito[]>(`${this.API_URL}/lineasCarrito`);
   }
   postLineasCarrito(linea: LineaCarrito): Observable<LineaCarrito> {
     return this.http.post<LineaCarrito>(`${this.API_URL}/lineasCarrito`, linea);
@@ -77,5 +95,9 @@ export class Api {
         error: (err) => console.error('❌ Error en PUT:', err),
       }),
     );
+  }
+
+  eliminarLineaCarrito(lineaId: number) {
+    return this.http.delete(`${this.API_URL}/lineasCarrito/${lineaId}`);
   }
 }

@@ -20,6 +20,6 @@ export class CardArticulo implements OnInit {
 
   comprarArticulo(articulo: any): void {
     console.log(`Comprando artículo: ${articulo.nombre}`);
-    //this.carritoService.anyadirLineaCarrito(this.articulo);
+    this.carritoService.anyadirLineaCarrito(articulo);
   }
 }

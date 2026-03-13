@@ -9,6 +9,7 @@ import { enviroment } from '../../enviroments/enviroment';
 import AES from 'crypto-js/aes';
 import Utf8 from 'crypto-js/enc-utf8';
 import { CarritoService } from './carrito-service';
+import { MensajesService } from './mensajesService';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,8 @@ export class Auth {
     private cookieService: CookieService,
     @Inject(PLATFORM_ID) private platformId: Object,
     injector: Injector,
+    public mensajesService: MensajesService,
+    private carritoService: CarritoService
   ) {
     this.injector = injector;
     this.cargarUsuarioDesdeCookie();
@@ -52,7 +55,7 @@ export class Auth {
     // Effect para crear carrito cuando hay usuario autenticado
     effect(() => {
       const usuario = this.usuarioAutenticado();
-      
+
       if (this.primeraEjecucionCarritoEffect) {
         this.primeraEjecucionCarritoEffect = false;
         return;
@@ -74,6 +77,7 @@ export class Auth {
       const usuario = usuarios.find((u) => u.email === email && u.password === password);
 
       if (!usuario) {
+        this.mensajesService.agregarMensaje('Credenciales del usuario incorrectas', 'error');
         throw new Error('Credenciales incorrectas');
       }
 
@@ -82,12 +86,13 @@ export class Auth {
 
       return usuario;
     } catch (error) {
-      console.error('Error login:', error);
+      this.mensajesService.agregarMensaje(`Credenciales del usuario incorrectas ${error}`, 'error');
       throw error;
     }
   }
 
   logout(): void {
+    this.mensajesService.agregarMensaje(`Hasta pronto`, 'info');
     this.usuarioAutenticado.set(null);
     this.cookieCargada = false;
     this.primeraEjecucionEffect = true;
@@ -138,30 +143,29 @@ export class Auth {
   }
 
   // auth.ts
-async actualizarUsuario(usuario: Partial<Usuario> & { email: string }) {
-  try {
-    if (!usuario) {
-      throw new Error('Usuario no existe o está vacío');
+  async actualizarUsuario(usuario: Partial<Usuario> & { email: string }) {
+    try {
+      if (!usuario) {
+        throw new Error('Usuario no existe o está vacío');
+      }
+
+      const usuarioActualizado = await firstValueFrom(this.api.putActualizarUsuario(usuario));
+
+      if (!usuarioActualizado) {
+        throw new Error('El backend no devolvió el usuario actualizado');
+      }
+
+      const usuarioConNuevaReferencia = { ...usuarioActualizado };
+      this.setUsuarioAutenticado(usuarioConNuevaReferencia);
+
+      console.log('✅ Usuario actualizado en signal:', this.usuarioAutenticado());
+
+      return usuarioActualizado;
+    } catch (error) {
+      console.error('❌ Error actualizando usuario:', error);
+      throw error;
     }
-
-    const usuarioActualizado = await firstValueFrom(this.api.putActualizarUsuario(usuario));
-    
-    if (!usuarioActualizado) {
-      throw new Error('El backend no devolvió el usuario actualizado');
-    }
-
-    const usuarioConNuevaReferencia = { ...usuarioActualizado };
-    this.setUsuarioAutenticado(usuarioConNuevaReferencia);
-
-    console.log('✅ Usuario actualizado en signal:', this.usuarioAutenticado());
-    
-    return usuarioActualizado;
-
-  } catch (error) {
-    console.error('❌ Error actualizando usuario:', error);
-    throw error;
   }
-}
 
   estaLogueado(): boolean {
     return this.usuarioAutenticado() !== null;

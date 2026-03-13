@@ -28,7 +28,7 @@ export class OpcionesUsuario implements OnInit {
 
   ngOnInit(): void {
     const usuario = this.authService.getUsuarioAutenticado();
-    if (usuario) this.carritoService.cargarCarrito(usuario);
+    if (usuario) this.carritoService.cargarCarrito();
   }
 
   verCarrito() {

@@ -1,15 +1,41 @@
-<div>
-    @if (lineas().length === 0) {
-        <p>Tu carrito está vacío</p>
-    } @else {
-        <section>
-            @for (linea of lineas(); track $index) {
-                <article>
-                    <p>{{linea.articulo!.nombre}}</p>
-                    <p>Cantidad: {{linea.cantidad}}</p>
-                    <p>Precio: {{linea.articulo!.precio}}€</p>
-                </article>
-            }
-        </section>
-    }
+<div class="carrito-container">
+  <!-- Mensaje si el carrito está vacío -->
+  <div *ngIf="lineas().length === 0" class="carrito-vacio">
+    <p>Tu carrito está vacío</p>
+  </div>
+
+  <!-- Carrito con artículos -->
+  <section *ngIf="lineas().length > 0" class="carrito-articulos">
+    <article *ngFor="let linea of lineas()" class="articulo">
+      <div class="articulo-info">
+        <img [src]="linea.articulo.imagen" class="imagen" style="max-width: 100px" />
+        <div>
+          <p class="nombre">{{ linea.articulo!.nombre }}</p>
+          @if (linea.articulo.descuento?.id) {
+            <p class="precioDescuento">
+              {{ linea.articulo!.precio | currency: 'EUR' : 'symbol' : '1.2-2' }}
+            </p>
+            <p class="precio">
+              {{ linea.articulo!.precioConDescuento | currency: 'EUR' : 'symbol' : '1.2-2' }}
+            </p>
+          } @else {
+            <p class="precio">
+              {{ linea.articulo!.precio | currency: 'EUR' : 'symbol' : '1.2-2' }}
+            </p>
+          }
+        </div>
+      </div>
+      <div class="articulo-cantidad">
+        <button (click)="decrementar(linea)">-</button>
+        <p class="cantidad">{{ linea.cantidad }}</p>
+        <button (click)="incrementar(linea)">+</button>
+      </div>
+    </article>
+    <div class="totalPrecio">
+      <strong>Precio Total:{{ precioTotal() | currency: 'EUR' }}</strong>
+    </div>
+    <div>
+      <button type="button" class="botonCompra" (click)="realizarCompra()">Realizar Compra</button>
+    </div>
+  </section>
 </div>
